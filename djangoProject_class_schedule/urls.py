@@ -18,5 +18,8 @@ from django.urls import path
 from app import views
 urlpatterns = [
     #    path('admin/', admin.site.urls),
-    path('', views.main_page)
+    # 根据云麓的需求转换为0101
+    path('ConvertTo01', views.convert),
+    # 主页
+    path('', views.main_page),
 ]
