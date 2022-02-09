@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>课程表信息自动爬取</title>
+</head>
+<body>
+<h1>欢迎使用课程表信息自动爬取功能！</h1>
+<p>使用方法：</p>
+<p>① 输入学号和密码，选择学年学期，点击登录。</p>
+<p>② 查看获取到的本届的专业班级信息是否正确。</p>
+<p>③ 点击底部的【开始爬取】按钮进行课程信息的爬取。可能需要等待1-5分钟的爬取过程。</p>
+<p>④ 查看爬取后的数据是否正确，是否有类似【处理你的请求出错】之类的字样。</p>
+<p>⑤ 确认无误后点击底部的【保存至数据库】按钮，将课程表数据覆盖到数据库中。</p>
+<p>*注意：尽量使用直接连接校园网进行爬取，否则可能会出现'远程主机强迫关闭了一个现有连接'的错误！</p>
+<h2>登录部分</h2>
+{% if not login_info %}
+<form action="" method="post">
+    <span>学号：</span>
+    <input type="text" name="userid" value="2020005929">
+    <span>密码：</span>
+    <input type="password" name="password" value="140317">
+    <span>学年学期：</span>
+    <input type="text" name="xnxq" value="2020-2021-2-1">
+    <button>登录并获取本学期专业班级列表</button>
+</form>
+<span>*注意：此处必须按照格式填写，2020-2021表示2020-2021学年，后面2-1表示春季（下学期），3-1表示夏季（好像没啥用），1-1表示秋季（上学期）</span>
+{% endif %}
+{% if login_info %}
+    <span>{{ login_info }}</span>
+    <br>
+    <span>学年学期：{{ xnxq }}</span>
+
+<h2>爬取操作部分</h2>
+<p>将要爬取的班级列表：</p>
+{% for bjh in bjh_list %}
+<span>【{{ bjh }}】</span>
+{% endfor %}
+<br>
+<span>确认是上述专业班级后，请点击下方的按钮开始爬取。</span>
+<form action="" method="get">
+    <input type="hidden" value="start" name="get">
+    <input type="hidden" value="{{ xnxq }}" name="xnxq">
+    <button>开始爬取</button>
+</form>
+{% endif %}
+<h2>显示结果部分</h2>
+{% if class_schedule_dict %}
+    <table border="1">
+    <tr>
+        <th>专业班级</th>
+        <th>课程信息</th>
+    </tr>
+    {% for key,value in class_schedule_dict.items %}
+        <tr>
+        <td>{{ key }}</td>
+        <td>{{ value }}</td>
+        </tr>
+    {% endfor %}
+<p>确定爬取的数据无误后，请点击保存到数据库进行存储</p>
+    <form action="" method="get">
+        <input type="hidden" name="get" value="save">
+        <input type="hidden" value="{{ xnxq }}" name="xnxq">
+    <button>保存到数据库</button>
+    </form>
+{% endif %}
+
+</body>
+</html>
