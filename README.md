@@ -1,7 +1,7 @@
 # 太理课程表爬取
 
 #### 介绍
-基于pytyut的太理课程表爬取。
+基于[pytyut](https://gitee.com/jixiaob/pytyut)的太理课程表爬取。
 
 #### 功能简介
 使用Django开发。
