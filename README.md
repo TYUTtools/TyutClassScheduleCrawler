@@ -1,7 +1,7 @@
 # 太理课程表爬取
 
 #### 介绍
-基于[pytyut](https://gitee.com/jixiaob/pytyut)的太理课程表爬取。
+基于[pytyut](https://github.com/TYUTtools/pytyut)的太理课程表爬取。
 
 #### 功能简介
 使用Django开发。
@@ -13,4 +13,4 @@
 保存到另一个表里面
 
 #### 注意⚠️
-如果遇到登录等报错问题请尝试替换文件以更新[pytyut](https://gitee.com/jixiaob/pytyut)
+如果遇到登录等报错问题请尝试替换文件以更新[pytyut](https://github.com/TYUTtools/pytyut)
